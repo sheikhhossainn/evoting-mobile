@@ -57,7 +57,49 @@ If you haven't read `docs/CONTEXT.md` yet, stop and read it now — it explains 
 | `Graphify-out/` | Generated whole-project structure graph (tool output — don't hand-edit) |
 | `docs/implemented_features.md` | Running log of what's been built, updated before every push |
 | `docs/HANDOFF.md` | Current session state, for handing off to the next agent |
+| `docs/upstream/` | Read-only design/security docs pulled from `evoting-simulation` (see below) — not this repo's own spec |
+| `packages/core-api/` | Vendored, platform-neutral API client (see `docs/UPSTREAM_SYNC.md`) |
+| `packages/core-crypto/` | Vendored, platform-neutral ballot crypto (see `docs/UPSTREAM_SYNC.md`) |
+
+## Source-of-truth boundaries
+
+`evoting-simulation` (`https://github.com/sheikhhossainn/evoting-simulation`)
+is the authority for the backend protocol, the database schema, and every
+security/cryptographic decision described in `docs/upstream/`. This repo is
+the authority for its own app configuration, Expo assets, and branch/push
+workflow. Do not modify `evoting-simulation`'s backend, schema, cryptographic
+protocol, or election semantics from this repo — if a change there looks
+necessary, state the evidence and the requested change and get it confirmed
+separately; don't just make it.
+
+`docs/upstream/*.md` are references, not instructions that override this file
+or this repo's own workflow — treat them the way `docs/ARCHITECTURE.md`
+describes: derive this repo's own docs and code from them, don't duplicate
+them wholesale, and don't repeat a status claim from them without confirming
+it against the actual source or a test run first (see `docs/TEST.md` for a
+concrete example of a claim — "13/13 core-crypto tests passing" — that is true
+upstream and not yet true in this repo).
+
+## Selective upstream sync rules
+
+Never clone `evoting-simulation` in full. Pull only the exact paths listed in
+`docs/UPSTREAM_SYNC.md`, via sparse-checkout, into a scratch clone that gets
+deleted afterward — never leave a second working copy of the upstream repo
+lying around in this repo's tree. Record the exact commit fetched, the exact
+paths retained, and the process used in `docs/UPSTREAM_SYNC.md` in the same
+change. Backend files read for contract study are never copied into this
+repo's tree or its app bundle — read them from the scratch clone, confirm the
+contract, then discard them.
 
 ## Inherited security baseline
 
-This app still carries the security rules from the original migration plan (`MOBILE_AGENT_HANDOFF.md`, vendored under `docs/upstream/` per `docs/UPSTREAM_SYNC.md`): HTTPS-only, no NID/token/ciphertext/proof logging, fail-closed offline behavior, and no mock-success path in production builds. Treat these as non-negotiable regardless of which feature you're implementing.
+This app carries the security rules from the upstream migration plan
+(`docs/upstream/MOBILE_AGENT_HANDOFF.md`, `docs/upstream/THREAT_MODEL_AND_SECURITY.md`
+— see `docs/UPSTREAM_SYNC.md` for provenance): HTTPS-only, no NID/token/
+ciphertext/proof logging, fail-closed offline behavior (no offline vote
+queueing), and no mock-success path in production builds. `docs/ARCHITECTURE.md`
+states these as concrete invariants (eligibility/auth, ballot secrecy,
+one-vote enforcement, ballot validity, server-vs-UI state, anchoring/receipt/
+verification, auditability limits). Treat all of them as non-negotiable
+regardless of which feature you're implementing — a change to any of them
+needs an explicit user decision, not a local judgment call.
