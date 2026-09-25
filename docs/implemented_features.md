@@ -13,6 +13,12 @@ Every agent updates this file before each push. One entry per push — what was 
 
 -->
 
+## 2026-09-25 — feature/mobile-ui-humaira — Add @expo/ngrok for tunnel mode support
+
+- What: Installed `@expo/ngrok@^4.1.0` in `packages/mobile-app` (and globally) to resolve `CommandError: Install @expo/ngrok@^4.1.0 and try again` when running `npx expo start --tunnel`.
+- How: Added `@expo/ngrok` to `packages/mobile-app/package.json` devDependencies and regenerated `package-lock.json`.
+- Trade-offs / follow-ups: Allows remote testing and physical phone connectivity via Expo Go over cellular or separate Wi-Fi networks without firewall or router port forwarding issues.
+
 ## 2026-09-25 — feature/mobile-ui-humaira — Polished Mobile UI Design System & Core Screen Implementations
 
 - What: Designed and implemented a cohesive, WCAG 2.1 AA compliant mobile visual system and reusable component architecture for the mobile voting client (`packages/mobile-app`), alongside polished implementations for the four core journey screens:

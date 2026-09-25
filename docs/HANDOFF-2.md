@@ -14,6 +14,7 @@ Design and implementation of the polished mobile visual system and four core vot
    - `BallotScreen.tsx` & `AuditScreen.tsx`: Candidate selection, selection summary, direct "Review & Cast" flow, and Benaloh local cast-or-audit verification with secure keychain persistence.
 4. **Integration**: `App.tsx` wired with new screens and components. Reachable UI preserved for `Confirm`, `Receipt`, `Verify`, `Watchdog`, `Results`, and `Settings`.
 5. **Documentation**: Created `docs/MOBILE_UI_DIRECTION.md` and updated `docs/implemented_features.md`.
+6. **Tunnel Support**: Installed `@expo/ngrok@^4.1.0` in devDependencies to support `npx expo start --tunnel`.
 
 All local verification gates pass cleanly:
 - `npm run typecheck --workspace=@evoting/mobile-app`: Exit 0 (clean).
