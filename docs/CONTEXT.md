@@ -2,7 +2,7 @@
 
 ## What is this project?
 
-**Secure Vote BD** is a capstone blockchain-based e-voting system.
+This is a capstone blockchain-based e-voting system.
 `evoting-mobile` is its dedicated React Native (Expo) client — the app a
 voter installs to authenticate, cast a ballot, audit-or-cast, get a receipt,
 and verify their vote was recorded correctly. It is a tamper-**evident**

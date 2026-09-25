@@ -179,7 +179,7 @@ export default function App() {
     <SafeAreaView style={styles.safe}>
       {!online && <View accessible accessibilityRole="alert" style={styles.offline}><Text style={styles.offlineText}>You appear to be offline. Your vote is NOT recorded. Reconnect to continue.</Text></View>}
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
-        <View style={styles.header}><Text style={styles.eyebrow}>SECURE VOTE</Text><Text style={styles.title}>A clear, verifiable ballot.</Text><Text style={styles.muted}>Server truth first. No offline vote creation.</Text></View>
+        <View style={styles.header}><Text style={styles.eyebrow}>E-VOTING</Text><Text style={styles.title}>A clear, verifiable ballot.</Text><Text style={styles.muted}>Server truth first. No offline vote creation.</Text></View>
         {error && <View accessible accessibilityRole="alert" style={styles.error}><Text style={styles.errorText}>{error}</Text></View>}
         {busy && <ActivityIndicator color="#006a4e" style={styles.spinner} />}
         {screen === "hub" && <Hub elections={elections} onSelect={selectElection} onRefresh={() => { if (api) void refreshElections(api); }} onPublic={(next) => next === "settings" ? setScreen("settings") : openPublic(next)} />}

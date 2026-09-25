@@ -1,6 +1,6 @@
 # evoting-mobile
 
-React Native (Expo) client for **Secure Vote BD**, a blockchain-based e-voting capstone system.
+React Native (Expo) client for a blockchain-based e-voting capstone system.
 
 AI agents: read [AGENT.md](AGENT.md) first, then [docs/CONTEXT.md](docs/CONTEXT.md).
 
