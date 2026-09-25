@@ -13,6 +13,19 @@ Every agent updates this file before each push. One entry per push — what was 
 
 -->
 
+## 2026-09-25 — feature/mobile-ui-humaira — Polished Mobile UI Design System & Core Screen Implementations
+
+- What: Designed and implemented a cohesive, WCAG 2.1 AA compliant mobile visual system and reusable component architecture for the mobile voting client (`packages/mobile-app`), alongside polished implementations for the four core journey screens:
+  1. **Election Hub (`HubScreen.tsx`)**: High-contrast card list with real-time status badges (`Open for Voting` vs `Not Accepting Votes`), active election filtering tab, cryptographic assurance trust card, empty state with retry, and secondary navigation to public auditing tools (Watchdog, Results, Settings).
+  2. **Voter Authentication (`AuthScreen.tsx`)**: Keyboard-safe 11-digit NID entry using `KeyboardAvoidingView` and numeric keypad, live digit countdown and verification helper text, privacy and secrecy guarantee banner, and disabled/loading state management.
+  3. **Voter Status (`StatusScreen.tsx`)**: 3-way status display (Eligible, Already Voted, Ineligible), constituency metadata card, session TTL and secure-store explanation, and guarded ballot entry.
+  4. **Official Ballot & Benaloh Cast-or-Audit (`BallotScreen.tsx` & `AuditScreen.tsx`)**: Single-choice candidate radio cards (`ChoiceCard`), candidate party badges, selection summary bar, direct "Review & Cast" flow to `Confirm`, and dedicated "Benaloh Cast-or-Audit" flow revealing ElGamal $(c_1, c_2)$ ciphertexts and randomness $r$ with local secure-store persistence.
+  5. **Reusable Component Library (`src/components/`)**: `Button` (5 variants, min 44pt touch target, loading states, accessibility roles), `Card` (surface elevation containers), `Badge` (dual-coded semantic status chips with icon + label + color), `Input` (accessible text input with 48pt height and live region announcements), `Header` (consistent typography and 44x44pt back navigation), `ChoiceCard` (radio card with role and state), and `StatusBanner` (accessible alerts for error, warning, info, and offline).
+  6. **Token System (`src/theme/`)**: Deep Pine Green primary (`#00624A`), Slate typography scale with > 4.5:1 contrast, 4pt/8pt spacing grid, and radius tokens.
+  7. **Supporting Documentation (`docs/MOBILE_UI_DIRECTION.md`)**: Full visual system specification and interaction guide.
+- How: Created modular theme tokens under `src/theme/`, created accessible reusable components under `src/components/`, implemented target screens under `src/screens/`, wired components cleanly into `App.tsx` while strictly preserving all existing cryptographic (ElGamal + ZKP), session storage (`expo-secure-store`), and REST API (`@evoting/core-api`) contracts. Replaced inline screen code in `App.tsx` while retaining reachable UI for `Confirm`, `Receipt`, `Verify`, `Watchdog`, `Results`, and `Settings`.
+- Trade-offs / follow-ups: Kept pure Unicode geometric and status symbols (`●`, `✓`, `✕`, `🔒`, `🛡`, `ℹ`, `▲`, `⚠`) instead of adding heavy icon libraries (`@expo/vector-icons` / `react-native-svg`), ensuring zero native bundle inflation and maximum cross-platform reliability. All 13 crypto tests, 7 API tests, and TypeScript compiler checks pass cleanly (exit 0).
+
 ## 2026-09-25 — agent session — Wire App.tsx, fix broken gates from the fetch
 
 - What: Fixed the three gates the earlier fetch pass (below) had left broken.

@@ -1,5 +1,7 @@
 # HANDOFF.md
 
+> **NOTE:** This session is superseded by [HANDOFF-2.md](./HANDOFF-2.md), which documents the completed mobile UI visual system, reusable components, and screen implementations on `feature/mobile-ui-humaira`.
+
 Primary session-state file. Whoever's context budget is running low creates
 the next numbered version (`HANDOFF-2.md`, etc.) using the template at the
 bottom — don't just append notes here.
