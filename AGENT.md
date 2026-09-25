@@ -24,6 +24,18 @@ If you haven't read `docs/CONTEXT.md` yet, stop and read it now — it explains 
 10. **Keep `docs/CONTEXT.md` current.** If the project's shape changes (new doc, new phase, new owner), update it in the same PR.
 11. **Track your own token/context budget.** Before you're likely to hit a session limit, create a new `HANDOFF.md` (or the next numbered one, e.g. `HANDOFF-2.md`) as the primary session-state file — not just an overflow note. Use this template:
 
+## Git Workflow Rules (must-follow for all agents)
+
+1. **Never push directly to `main` or `dev` branches.** All changes must go through feature branches first. Create a branch named `feature/branch-name` for any specific feature or task.
+
+2. **Never delete `main` or `dev` branches.** These are protected branches and must always remain in the repository.
+
+3. **For specific features, create feature branches.** Use the naming convention `feature/branch-name` (e.g., `feature/update-agent-rules`, `feature/auth-flow`). Branch from `dev` and push your changes to the feature branch.
+
+4. **Ensure git credentials before pushing.** Always verify your git user.name and git user.email are set correctly to your GitHub account credentials before making any push. Unsuccessful pushes may result from credential issues.
+
+5. **Push to feature branch only.** Once changes are ready, push to the feature branch and wait for a pull request review/merge.
+
     ```markdown
     ## Current task status
     ## What was just completed
