@@ -13,6 +13,15 @@ Every agent updates this file before each push. One entry per push — what was 
 
 -->
 
+## 2026-09-25 — feature/mobile-ui-humaira — Fix runtime error: Cannot read property 'fontSize' of undefined
+
+- What: Fixed runtime crash on initial app launch in Expo (`TypeError: Cannot read property 'fontSize' of undefined`).
+- How: 
+  1. `App.tsx`'s static `StyleSheet.create` accessed `typography.h1.fontSize`, `typography.h2.fontSize`, and `typography.bodySm.fontSize`, but `typography.ts` previously defined titles as `title1`, `title2`, and `display`.
+  2. Updated `packages/mobile-app/src/theme/typography.ts` with explicit `h1`, `h2`, `h3`, and `bodySm` definitions. Replaced loose `Record<string, TextStyle>` index signature with strict `const` mapping (`TypographyToken = keyof typeof typography`) so that invalid property accesses trigger compile-time errors instead of runtime crashes.
+  3. Replaced dynamic property accesses in `App.tsx` static stylesheet with explicit literal dimensions.
+- Trade-offs / follow-ups: Confirmed clean module bundling via `npx expo export --platform android` (622 modules bundled) and clean typecheck (`tsc --noEmit`).
+
 ## 2026-09-25 — feature/mobile-ui-humaira — Add @expo/ngrok for tunnel mode support
 
 - What: Installed `@expo/ngrok@^4.1.0` in `packages/mobile-app` (and globally) to resolve `CommandError: Install @expo/ngrok@^4.1.0 and try again` when running `npx expo start --tunnel`.
