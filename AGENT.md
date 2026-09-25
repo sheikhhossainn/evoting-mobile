@@ -4,7 +4,7 @@ This file is the entry point for any AI agent (Claude Code or otherwise) working
 
 ## What this repo is
 
-`evoting-mobile` is the standalone React Native (Expo) client for **Secure Vote BD**, a blockchain-based e-voting capstone system. It was split out of the original monorepo (`evoting-simulation`) so the mobile app has its own clean, focused history and CI.
+`evoting-mobile` is the standalone React Native (Expo) client for a blockchain-based e-voting capstone system. It was split out of the original monorepo (`evoting-simulation`) so the mobile app has its own clean, focused history and CI.
 
 If you haven't read `docs/CONTEXT.md` yet, stop and read it now — it explains the project and points you to every other doc you need.
 
