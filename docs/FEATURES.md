@@ -2,6 +2,15 @@
 
 Each feature below maps to one part of the voter journey. "Done" means every listed state is implemented, not just the happy path.
 
+**Status:** this is the target feature set, derived from the upstream design
+docs and confirmed against upstream's actual (already-built) reference
+implementation. As of this doc's last update, `packages/mobile-app/App.tsx`
+implements every screen below as one file (vendored verbatim from upstream) —
+the happy-path shape exists, but not every required state per screen is
+necessarily present, and nothing has been re-verified state-by-state against
+this list. See `docs/HANDOFF.md` for what's confirmed vs. still assumed. Don't
+mark anything below "done" without checking the current code first.
+
 ## 1. Election Hub
 Landing screen after login — shows active/upcoming elections the voter is eligible for.
 - States: loading, empty (no elections), error + retry

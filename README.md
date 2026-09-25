@@ -7,12 +7,30 @@ AI agents: read [AGENT.md](AGENT.md) first, then [docs/CONTEXT.md](docs/CONTEXT.
 ## Structure
 
 ```
-packages/mobile-app/   Expo app (TypeScript)
-packages/core-api/     API client + contracts (vendored, see docs/UPSTREAM_SYNC.md)
-packages/core-crypto/  Ballot encryption / proof generation (vendored, see docs/UPSTREAM_SYNC.md)
+packages/mobile-app/   Expo app (TypeScript). App.tsx is upstream's real
+                        implementation (vendored verbatim) — one file, the
+                        full voter journey as a state machine, not yet split
+                        behind the screen/state seam docs/ARCHITECTURE.md
+                        targets. See docs/HANDOFF.md.
+packages/core-api/     API client + contracts (vendored from evoting-simulation,
+                        see docs/UPSTREAM_SYNC.md). 7/7 tests pass standalone.
+packages/core-crypto/  Ballot encryption / proof generation (vendored, see
+                        docs/UPSTREAM_SYNC.md). 13/13 tests pass, incl. parity
+                        against a vendored, frozen copy of the backend
+                        verifier under test-fixtures/ — see docs/TEST.md.
 docs/                  Architecture, features, test strategy, handoff, sync notes
+docs/upstream/         Read-only design/security docs pulled from evoting-simulation
+                        (not this repo's own spec — see the note in docs/ARCHITECTURE.md)
 Graphify-out/          Generated codebase graph (tool output, don't hand-edit)
 ```
+
+All local acceptance gates are currently green (typecheck × 3 packages,
+`core-api`/`core-crypto` test suites, `expo export --platform android`) — see
+`docs/TEST.md` for the exact commands and caveats.
+
+This is a tamper-**evident**, independently verifiable voter client — not a
+tamper-proof one. See `docs/ARCHITECTURE.md` for what the app itself verifies
+versus what it only displays from the server.
 
 ## Getting started
 
