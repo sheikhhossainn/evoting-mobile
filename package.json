@@ -1,0 +1,14 @@
+{
+  "name": "evoting-mobile",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "npm run start --workspace=@evoting/mobile-app",
+    "android": "npm run android --workspace=@evoting/mobile-app",
+    "ios": "npm run ios --workspace=@evoting/mobile-app",
+    "web": "npm run web --workspace=@evoting/mobile-app",
+    "typecheck": "npm run typecheck --workspace=@evoting/mobile-app"
+  }
+}
